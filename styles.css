@@ -2,13 +2,16 @@
   --blue-body: #6b92c5;
   --orange-button: #f7941d;
   --light-blue-bg: #9ac6e7;
-  --dark-navy-outline: #3b4c6b;
+  --border: #3b4c6b;
   --display-gray: #e3e2d9;
   --button-face: #f1f1f1;
 
   --upper-bg: #a4bac7;
   --lower-bg: #d6e2e0;
   --screen-bg: #cfddba;
+  --dark-button: #50748c;
+  --light-button: #7798a8;
+  --orange-button: #ff8202;
 }
 
 
@@ -25,7 +28,7 @@ body {
     padding: 0;
 }
 
-.flex-horizontal {
+.flex-horizontal, .horizontal-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,8 +45,8 @@ body {
 .upper-calculator {
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
-    border: 6px solid var(--dark-navy-outline);
-    border-bottom: 3px solid var(--dark-navy-outline);
+    border: 6px solid var(--border);
+    border-bottom: 3px solid var(--border);
     width: 300px;
     height: 100px;
     background-color: var(--upper-bg);
@@ -52,8 +55,8 @@ body {
 .lower-calculator {
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
-    border: 6px solid var(--dark-navy-outline);
-    border-top: 3px solid var(--dark-navy-outline);
+    border: 6px solid var(--border);
+    border-top: 3px solid var(--border);
     width: 300px;
     height: 280px;
     background-color: var(--lower-bg);
@@ -63,6 +66,56 @@ body {
     width: 230px;
     height: 55px;
     background-color: var(--screen-bg);
-    border: 5px solid var(--dark-navy-outline);
+    border: 5px solid var(--border);
     border-radius: 9px;
+}
+
+.buttons {
+    margin: 16px;
+    gap: 5px;
+}
+
+.horizontal-buttons {
+    gap: 5px;
+}
+.vertical-buttons{
+    gap: 6px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.first-row-button, .regular-row-button {
+    width: 50px;
+    height: 35px;
+    border: 3px solid var(--border);
+    border-radius: 5px;
+    color: white;
+    font-size: 24px;
+}
+
+.first-row-button {
+    background-color: var(--dark-button);
+}
+
+.regular-row-button {
+background-color: var(--light-button);
+}
+
+.wide-button {
+    width: 104px;
+}
+
+.high-button {
+    width: 50px;
+    height: 75px;
+    border: 3px solid var(--border);
+    border-radius: 5px;
+    color: white;
+    font-size: 24px;
+    background-color: var(--orange-button);
 }

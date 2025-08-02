@@ -11,17 +11,41 @@
         <div class="upper-calculator flex-vertical">
             <div class="screen"></div>
         </div>
-        <div class="lower-calculator">
-        <div class="buttons">
-            <div class="vertical-buttons"></div>
-            <div class="vertical-buttons"></div>
-            <div class="vertical-buttons"></div>
-            <div class="horizontal-buttons">
+        <div class="lower-calculator flex-vertical">
+        <div class="buttons flex-vertical">
+            <div class="horizontal-buttons flex-horizontal">
+                <button class="first-row-button" id="clear">C</button>
+                <button class="first-row-button" id="power">^</button>
+                <button class="first-row-button" id="divide">/</button>
+                <button class="first-row-button" id="multiply">*</button>
+            </div>
+            <div class="horizontal-buttons flex-horizontal">
+                <button class="regular-row-button" id="seven">7</button>
+                <button class="regular-row-button" id="eight">8</button>
+                <button class="regular-row-button" id="nine">9</button>
+                <button class="regular-row-button" id="subtract">-</button>
+            </div>
+            <div class="horizontal-buttons flex-horizontal">
+                <button class="regular-row-button" id="four">4</button>
+                <button class="regular-row-button" id="five">5</button>
+                <button class="regular-row-button" id="six">6</button>
+                <button class="regular-row-button" id="add">+</button>
+            </div>
+            <div class="vertical-buttons flex-horizontal">
                 <div class="left">
-                    <div class="upper"></div>
-                    <div class="lower"></div>
+                    <div class="upper">
+                        <button class="regular-row-button" id="one">1</button>
+                        <button class="regular-row-button" id="two">2</button>
+                        <button class="regular-row-button" id="three">3</button>
+                    </div>
+                    <div class="lower">
+                        <button class="regular-row-button wide-button" id="zero">0</button>
+                        <button class="regular-row-button" id="decimal">.</button>
+                    </div>
                 </div>
-                <div class="right"></div>
+                <div class="right">
+                    <button class="high-button" id="equals">=</button>
+                </div>
             </div>
         </div>
         </div>
