@@ -60,6 +60,11 @@ function handleButtonClick(e) {
         return;
     }
 
+    if (e.target.id === 'equals') {
+        lastInput.innerHTML = evaluate(history.innerHTML);
+        return;
+    }
+
     if (lastInput.innerHTML === '') {
         history.innerHTML += buttons[e.target.id];
         lastInput.innerHTML += buttons[e.target.id];
@@ -76,10 +81,6 @@ function handleButtonClick(e) {
             lastInput.innerHTML = buttons[e.target.id];
         }
         return;
-    }
-
-    else if (e.target.id === 'equals') {
-        lastInput.innerHTML = evaluate(history.innerHTML);
     }
 
     else {
