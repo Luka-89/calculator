@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-    <script href="script.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="calculator flex-vertical">
         <div class="upper-calculator flex-vertical">
             <div class="screen">
-                <p class="equation"></p>
-                <p class="last-decision"></p>
+                <p class="history"></p>
+                <p class="last-input"></p>
             </div>
         </div>
         <div class="lower-calculator flex-vertical">
         <div class="buttons flex-vertical">
+            <div class="horizontal-buttons flex-horizontal">
+                <button class="first-row-button" id="delete">⌫</button>
+                <button class="first-row-button" id=""></button>
+                <button class="first-row-button" id="leftBracket">(</button>
+                <button class="first-row-button" id="rightBracket">)</button>
+            </div>
             <div class="horizontal-buttons flex-horizontal">
                 <button class="first-row-button" id="clear">C</button>
                 <button class="first-row-button" id="power">^</button>
@@ -27,13 +33,13 @@
                 <button class="regular-row-button" id="seven">7</button>
                 <button class="regular-row-button" id="eight">8</button>
                 <button class="regular-row-button" id="nine">9</button>
-                <button class="regular-row-button" id="subtract">-</button>
+                <button class="first-row-button" id="subtract">-</button>
             </div>
             <div class="horizontal-buttons flex-horizontal">
                 <button class="regular-row-button" id="four">4</button>
                 <button class="regular-row-button" id="five">5</button>
                 <button class="regular-row-button" id="six">6</button>
-                <button class="regular-row-button" id="add">+</button>
+                <button class="first-row-button" id="add">+</button>
             </div>
             <div class="vertical-buttons flex-horizontal">
                 <div class="left">
