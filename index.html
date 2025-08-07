@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <script href="script.js" defer></script>
 </head>
 <body>
     <div class="calculator flex-vertical">
         <div class="upper-calculator flex-vertical">
-            <div class="screen"></div>
+            <div class="screen">
+                <p class="equation"></p>
+                <p class="last-decision"></p>
+            </div>
         </div>
         <div class="lower-calculator flex-vertical">
         <div class="buttons flex-vertical">
@@ -33,12 +37,12 @@
             </div>
             <div class="vertical-buttons flex-horizontal">
                 <div class="left">
-                    <div class="upper">
+                    <div class="upper flex-horizontal">
                         <button class="regular-row-button" id="one">1</button>
                         <button class="regular-row-button" id="two">2</button>
                         <button class="regular-row-button" id="three">3</button>
                     </div>
-                    <div class="lower">
+                    <div class="lower flex-horizontal">
                         <button class="regular-row-button wide-button" id="zero">0</button>
                         <button class="regular-row-button" id="decimal">.</button>
                     </div>
