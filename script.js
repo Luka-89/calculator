@@ -48,17 +48,46 @@ let buttons = {
 
 function handleButtonClick(e) {
     if (!(e.target.id in buttons)) return;
-    if(e.target.id === 'clear') {
+
+    if (e.target.id === 'clear') {
         history.innerHTML = '';
         lastInput.innerHTML = '';
         return;
     }
-    if(e.target.id === 'delete') {
-        history.innerHTML = history.innerHTML.slice(0, -1);
-        if(lastInput.innerHTML !== '') lastInput.innerHTML = lastInput.innerHTML.slice(0, -1);
+    if (e.target.id === 'delete') {
+        if (history.innerHTML !== '') history.innerHTML = history.innerHTML.slice(0, -1);
+        if (lastInput.innerHTML !== '') lastInput.innerHTML = lastInput.innerHTML.slice(0, -1);
         return;
     }
-    history.innerHTML += buttons[e.target.id];
-    lastInput.innerHTML += buttons[e.target.id];
-    
+
+    if (lastInput.innerHTML === '') {
+        history.innerHTML += buttons[e.target.id];
+        lastInput.innerHTML += buttons[e.target.id];
+        return;
+    }
+
+    if (buttons[e.target.id] <= '9' && buttons[e.target.id] >= '0') {
+        if (lastInput.innerHTML.at(-1) <= '9' && lastInput.innerHTML.at(-1) >= '0') {
+            history.innerHTML += buttons[e.target.id];
+            lastInput.innerHTML += buttons[e.target.id];
+        }
+        else {
+            history.innerHTML += buttons[e.target.id];
+            lastInput.innerHTML = buttons[e.target.id];
+        }
+        return;
+    }
+
+    else if (e.target.id === 'equals') {
+        lastInput.innerHTML = evaluate(history.innerHTML);
+    }
+
+    else {
+        history.innerHTML += buttons[e.target.id];
+        lastInput.innerHTML = buttons[e.target.id];
+    }
+}
+
+function evaluate(string) {
+    return "work in progress";
 }
