@@ -45,6 +45,13 @@ let buttons = {
     rightBracket: ')',
 };
 
+let operationPriority = {
+    '^': 3,
+    '*': 2,
+    '/': 2,
+    '+': 1,
+    '-': 1,
+}
 
 function handleButtonClick(e) {
     if (!(e.target.id in buttons)) return;
@@ -61,7 +68,7 @@ function handleButtonClick(e) {
     }
 
     if (e.target.id === 'equals') {
-        lastInput.innerHTML = evaluate(history.innerHTML);
+        lastInput.innerHTML = evaluate(history.innerHTML, 0, history.innerHTML.length);
         return;
     }
 
@@ -90,5 +97,26 @@ function handleButtonClick(e) {
 }
 
 function evaluate(string) {
-    return "work in progress";
+    //will do after removeBrackets and evaluateWithoutBrackets
+}
+
+function removeBrackets(string) {
+    let stack = [];
+    stack.push(string.indexOf('('));
+    if(stack[0] === -1) return;
+
+    for(let i = 1; i < string.length; i++) {
+        if(string.at(i) === '(') stack.push(i);
+        else if(string.at(i) === ')') {
+            openBracket = stack[stack.length - 1];
+            let evaluatedBrackets = evaluateWithoutBrackets(string.slice(openBracket + 1, i));
+            string = string.slice(0, openBracket) + evaluatedBrackets + string.slice(i + 1);
+            i = openBracket;
+            stack.pop();
+        }
+    }
+} 
+
+function evaluateWithoutBrackets(string) {
+    //will do after handling the removal of brackets
 }
