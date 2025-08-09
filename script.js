@@ -68,7 +68,7 @@ function handleButtonClick(e) {
     }
 
     if (e.target.id === 'equals') {
-        lastInput.innerHTML = evaluate(history.innerHTML, 0, history.innerHTML.length);
+        lastInput.innerHTML = removeBrackets(history.innerHTML);
         return;
     }
 
@@ -105,7 +105,7 @@ function removeBrackets(string) {
     stack.push(string.indexOf('('));
     if(stack[0] === -1) return;
 
-    for(let i = 1; i < string.length; i++) {
+    for(let i = stack[0]; i < string.length; i++) {
         if(string.at(i) === '(') stack.push(i);
         else if(string.at(i) === ')') {
             openBracket = stack[stack.length - 1];
