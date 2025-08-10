@@ -67,8 +67,11 @@ function handleButtonClick(e) {
         return;
     }
 
+
+    //Needs to handle writing into lastInput if lastInput is displaying a solution
+    //doesnt handle multiple minuses for example -(-(-2))
     if (e.target.id === 'equals') {
-        lastInput.innerHTML = removeBrackets(history.innerHTML);
+        lastInput.innerHTML = evaluate(history.innerHTML);
         return;
     }
 
@@ -97,26 +100,77 @@ function handleButtonClick(e) {
 }
 
 function evaluate(string) {
-    //will do after removeBrackets and evaluateWithoutBrackets
+    string = removeBrackets(string);
+    let tokens = getTokens(string);
+    return evaluateWithoutBrackets(tokens, 0, tokens.length);
 }
 
 function removeBrackets(string) {
     let stack = [];
     stack.push(string.indexOf('('));
-    if(stack[0] === -1) return;
+    if(stack[0] === -1) return string;
 
     for(let i = stack[0]; i < string.length; i++) {
         if(string.at(i) === '(') stack.push(i);
         else if(string.at(i) === ')') {
             openBracket = stack[stack.length - 1];
-            let evaluatedBrackets = evaluateWithoutBrackets(string.slice(openBracket + 1, i));
+            let evaluatedBrackets = evaluate(string.slice(openBracket + 1, i));
             string = string.slice(0, openBracket) + evaluatedBrackets + string.slice(i + 1);
             i = openBracket;
             stack.pop();
         }
     }
+
+    return string;
 } 
 
-function evaluateWithoutBrackets(string) {
-    //will do after handling the removal of brackets
+
+//Doesnt yet work with ^, only + - * /
+function evaluateWithoutBrackets(tokens, start, end) { //contains start, doesnt contain end
+        if(end - start === 1) return tokens[start];
+        let plus = tokens.indexOf('+', start);
+        if(plus >= end) plus = -1;
+        let minus = tokens.indexOf('-', start);
+        if(minus >= end) minus = -1;
+        
+        if(plus < 0 && minus < 0) {
+            let res = tokens[start];
+            for(let i = start + 1; i < end; i++) {
+                switch(tokens[i]) {
+                    case '*':
+                        res = res * tokens[i + 1];
+                        i++;
+                        break;
+                    case '/':
+                        res = res / tokens[i + 1];
+                        i++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return res;
+        }
+
+        if(plus < 0) return evaluateWithoutBrackets(tokens, start, minus) - evaluateWithoutBrackets(tokens, minus + 1, end);
+        if(minus < 0) return evaluateWithoutBrackets(tokens, start, plus) + evaluateWithoutBrackets(tokens, plus + 1, end);
+        if(plus < minus) return evaluateWithoutBrackets(tokens, start, plus) + evaluateWithoutBrackets(tokens, plus + 1, end);
+        else return evaluateWithoutBrackets(tokens, start, minus) - evaluateWithoutBrackets(tokens, minus + 1, end);
+}
+
+function getTokens(string) {
+    tokens = [];
+    let j = -1;
+    for(let i = 0; i < string.length; i++) {
+        if(string.at(i) in operationPriority) {
+            if(i - j === 1) continue;
+            else {
+                tokens.push(parseFloat(string.slice(j + 1, i)));
+                tokens.push(string.slice(i, i + 1));
+                j = i;
+            }
+        }
+    }
+    tokens.push(parseFloat(string.slice(j + 1)));
+    return tokens;
 }
