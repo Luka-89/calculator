@@ -19,7 +19,6 @@ let buttons = {
     add: '+',
     multiply: '*',
     divide: '/',
-    //power: '^',
     equals: '=',
     decimal: '.',
     clear: 'clear',
@@ -36,24 +35,34 @@ let operationPriority = {
     '-': 1,
 }
 
+let equationState = 0;
+let inputBeforeEquation = '';
+
 function handleButtonClick(e) {
     if (!(e.target.id in buttons)) return;
 
     if (e.target.id === 'clear') {
         history.innerHTML = '';
         lastInput.innerHTML = '';
+        inputBeforeEquation = '';
         return;
     }
     if (e.target.id === 'delete') {
+        if(equationState) {
+            lastInput.innerHTML = inputBeforeEquation;
+            inputBeforeEquation = '';
+            equationState = 0;
+        }
         if (history.innerHTML !== '') history.innerHTML = history.innerHTML.slice(0, -1);
         if (lastInput.innerHTML !== '') lastInput.innerHTML = lastInput.innerHTML.slice(0, -1);
+        
         return;
     }
 
-
-    //Needs to handle writing into lastInput if lastInput is displaying a solution
     if (e.target.id === 'equals') {
+        if(!equationState) inputBeforeEquation = lastInput.innerHTML;
         lastInput.innerHTML = evaluate(history.innerHTML);
+        equationState = 1;
         return;
     }
 
@@ -64,6 +73,11 @@ function handleButtonClick(e) {
     }
 
     if (buttons[e.target.id] <= '9' && buttons[e.target.id] >= '0') {
+        if(equationState) {
+            equationState = 0;
+            lastInput.innerHTML = inputBeforeEquation;
+            inputBeforeEquation = '';
+        }
         if (lastInput.innerHTML.at(-1) <= '9' && lastInput.innerHTML.at(-1) >= '0') {
             history.innerHTML += buttons[e.target.id];
             lastInput.innerHTML += buttons[e.target.id];
@@ -76,6 +90,11 @@ function handleButtonClick(e) {
     }
 
     else {
+        if(equationState) {
+            equationState = 0;
+            lastInput.innerHTML = inputBeforeEquation;
+            inputBeforeEquation = '';
+        }
         history.innerHTML += buttons[e.target.id];
         lastInput.innerHTML = buttons[e.target.id];
     }
@@ -126,7 +145,6 @@ function removeBrackets(string) {
 } 
 
 
-//Doesnt yet work with ^, only + - * /
 function evaluateWithoutBrackets(tokens, start, end) { //contains start, doesnt contain end
         if(end - start === 1) return tokens[start];
         let plus = tokens.indexOf('+', start);
