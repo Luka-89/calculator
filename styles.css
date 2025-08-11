@@ -1,17 +1,18 @@
 :root {
-  --border: #3b4c6b;
-  --upper-bg: #a4bac7;
-  --lower-bg: #d6e2e0;
-  --screen-bg: #cfddba;
-  --dark-button-lighter: #5985a2;
-  --dark-button: #50748c;
-  --dark-button-darker: #395262;
-  --light-button-lighter: #86aab9;
-  --light-button: #7798a8;
-  --light-button-darker: #5f7884;
-  --orange-button-lighter: #ff9a34;
-  --orange-button: #ff8202;
-  --orange-button-darker: #b05800;
+    --background-color: #9ab3e2;
+    --border: #3b4c6b;
+    --upper-bg: #a4bac7;
+    --lower-bg: #d6e2e0;
+    --screen-bg: #cfddba;
+    --dark-button-lighter: #5985a2;
+    --dark-button: #50748c;
+    --dark-button-darker: #395262;
+    --light-button-lighter: #86aab9;
+    --light-button: #7798a8;
+    --light-button-darker: #5f7884;
+    --orange-button-lighter: #ff9a34;
+    --orange-button: #ff8202;
+    --orange-button-darker: #b05800;
 }
 
 
@@ -20,6 +21,7 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: monospace;    
+  background-color: var(--background-color);
 }
 
 .calculator {
