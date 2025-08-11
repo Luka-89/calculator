@@ -1,20 +1,3 @@
-/*let zero = document.querySelector("#zero");
-let one = document.querySelector("#one");
-let two = document.querySelector("#two");
-let three = document.querySelector("#three");
-let four = document.querySelector("#four");
-let five = document.querySelector("#five");
-let six = document.querySelector("#six");
-let seven = document.querySelector("#seven");
-let eight = document.querySelector("#eight");
-let nine = document.querySelector("#nine");
-let add = document.querySelector("#add");
-let subtract = document.querySelector("#subtract");
-let multiply = document.querySelector("#multiply");
-let divide = document.querySelector("#divide");
-let clear = document.querySelector("#clear");
-let decimal = document.querySelector("#decimal")
-*/
 let history = document.querySelector(".history");
 let lastInput = document.querySelector(".last-input");
 let calculator = document.querySelector(".calculator");
@@ -36,7 +19,7 @@ let buttons = {
     add: '+',
     multiply: '*',
     divide: '/',
-    power: '^',
+    //power: '^',
     equals: '=',
     decimal: '.',
     clear: 'clear',
@@ -69,7 +52,6 @@ function handleButtonClick(e) {
 
 
     //Needs to handle writing into lastInput if lastInput is displaying a solution
-    //doesnt handle multiple minuses for example -(-(-2))
     if (e.target.id === 'equals') {
         lastInput.innerHTML = evaluate(history.innerHTML);
         return;
@@ -106,6 +88,15 @@ function evaluate(string) {
 }
 
 function removeBrackets(string) {
+    for(let i = 0; i < string.length; i++) {
+        if(string.at(i) == '-') {
+            let j = i + 1;
+            while(string.at(j) == '-') j++;
+            if((j - i) % 2 === 0) string = string.slice(0, i) + '+' + string.slice(j);
+            else string = string.slice(0, i) + '-' + string.slice(j);
+        }
+    }
+    
     let stack = [];
     stack.push(string.indexOf('('));
     if(stack[0] === -1) return string;
@@ -120,6 +111,16 @@ function removeBrackets(string) {
             stack.pop();
         }
     }
+
+    for(let i = 0; i < string.length; i++) {
+        if(string.at(i) == '-') {
+            let j = i + 1;
+            while(string.at(j) == '-') j++;
+            if((j - i) % 2 === 0) string = string.slice(0, i) + '+' + string.slice(j);
+            else string = string.slice(0, i) + '-' + string.slice(j);
+        }
+    }
+    
 
     return string;
 } 
